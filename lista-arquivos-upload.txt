@@ -1,0 +1,73 @@
+ARQUIVOS PARA FAZER UPLOAD NO SERVIDOR
+========================================
+
+CONTROLLERS:
+------------
+app/Controllers/Chamados.php
+app/Controllers/AvaliacaoColaboradoraCliente.php
+
+CONTROLLERS OPERACIONAL (PASTA /controle/):
+--------------------------------------------
+controle/app/Controllers/Operacional/Nfe.php  ⚠️ IMPORTANTE - Corrige erro 404 + Controle de duplicatas
+
+MODELS OPERACIONAL (PASTA /controle/):
+---------------------------------------
+controle/app/Models/NfeModel.php  ⚠️ IMPORTANTE - Adiciona verificação de NFe duplicada
+
+VIEWS OPERACIONAL (PASTA /controle/):
+--------------------------------------
+controle/app/Views/operacional/nfe/review.php  ⚠️ ATUALIZADO - Dropdowns de mês/ano + Exibe XMLs ignorados/erros
+
+MODELS:
+-------
+app/Models/AvaliacaoColaboradoraClienteModel.php
+
+VIEWS - Dashboard e Login:
+---------------------------
+app/Views/dashboard/index.php
+app/Views/auth/login.php
+app/Views/layouts/main.php
+
+VIEWS - Email:
+--------------
+app/Views/emails/novo_chamado.php
+
+VIEWS - Avaliação Colaboradora:
+--------------------------------
+app/Views/avaliacao_colaboradora_cliente/avaliar.php
+app/Views/avaliacao_colaboradora_cliente/dashboard.php
+app/Views/avaliacao_colaboradora_cliente/historico.php
+app/Views/avaliacao_colaboradora_cliente/obrigado.php
+
+CONFIGURAÇÕES:
+--------------
+app/Config/Routes.php
+
+SQL (executar no banco):
+------------------------
+public/install_avaliacao_colaboradora_cliente.sql
+
+SQL - SISTEMA CONTROLE (executar no banco guil5541_sabores):
+-------------------------------------------------------------
+1. controle/public/install_servicos.sql                    ⚠️ IMPORTANTE - Cria tabela servicos
+2. controle/public/alter_refeicoes_add_servico_fields.sql  ⚠️ IMPORTANTE - Adiciona colunas servico_id e servico_nome na tabela refeicoes
+
+
+ARQUIVO DE TESTE (OPCIONAL):
+-----------------------------
+controle/public/test-nfe-url.php  (para diagnosticar problema de NFe no servidor)
+
+NÃO FAZER UPLOAD:
+-----------------
+.env (editar manualmente no servidor)
+writable/* (não precisa)
+public/test-dashboard.php (arquivo de teste local)
+
+
+DEPOIS DO UPLOAD - CONFIGURAR NO SERVIDOR:
+-------------------------------------------
+1. Executar o SQL no banco de dados
+2. Editar .env e adicionar configurações de email
+3. Criar email: noreply@saboresemmovimento.com.br no cPanel
+4. Adicionar senha do email no .env
+5. Limpar cache: rm -rf writable/cache/* writable/session/*

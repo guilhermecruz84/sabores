@@ -1,0 +1,145 @@
+=====================================================
+GUIA DE INSTALAÇÃO NO SERVIDOR HOSTGATOR
+=====================================================
+
+IMPORTANTE: Execute estes comandos VIA SSH no servidor!
+
+=====================================================
+PASSO 1: Fazer Upload dos Arquivos
+=====================================================
+
+1. Faça upload de TODA a pasta "controle" via FTP ou cPanel
+2. Coloque em: public_html/controle (ou onde preferir)
+
+=====================================================
+PASSO 2: Conectar via SSH
+=====================================================
+
+ssh seu_usuario@br404.hostgator.com.br
+Senha: sua_senha_cpanel
+
+=====================================================
+PASSO 3: Navegar até a Pasta
+=====================================================
+
+cd public_html/controle
+
+=====================================================
+PASSO 4: Instalar CodeIgniter 4 via Composer
+=====================================================
+
+composer install
+
+(Se der erro, tente: composer2 install)
+
+=====================================================
+PASSO 5: Configurar Permissões
+=====================================================
+
+chmod 755 app/
+chmod 755 public/
+chmod 777 public/uploads/
+chmod 777 writable/
+chmod 777 writable/cache/
+chmod 777 writable/logs/
+chmod 777 writable/session/
+
+mkdir -p public/uploads/chamados
+chmod 777 public/uploads/chamados
+
+=====================================================
+PASSO 6: Importar Banco de Dados
+=====================================================
+
+Opção A - Via phpMyAdmin:
+1. Acesse cPanel > phpMyAdmin
+2. Selecione banco: guil5541_sabores
+3. Clique em "Importar"
+4. Selecione o arquivo: database.sql
+5. Clique em "Executar"
+
+Opção B - Via SSH:
+mysql -h br404.hostgator.com.br -u guil5541_sabores -p guil5541_sabores < database.sql
+Senha: Sm2025.#
+
+=====================================================
+PASSO 7: Configurar URL no .env
+=====================================================
+
+Edite o arquivo .env e coloque a URL correta:
+
+app.baseURL = 'http://seu-dominio.com.br/'
+
+Ou se estiver em subpasta:
+
+app.baseURL = 'http://seu-dominio.com.br/controle/'
+
+=====================================================
+PASSO 8: Configurar .htaccess (se necessário)
+=====================================================
+
+Se o .htaccess não estiver funcionando, adicione isto no .htaccess da raiz:
+
+RewriteEngine On
+RewriteBase /controle/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ controle/public/index.php/$1 [L]
+
+=====================================================
+PASSO 9: Testar
+=====================================================
+
+Acesse no navegador:
+http://seu-dominio.com.br/controle/
+
+ou
+
+http://seu-dominio.com.br/
+
+Você deve ver a tela de LOGIN!
+
+=====================================================
+USUÁRIOS DE TESTE
+=====================================================
+
+Admin:
+Email: admin@sabores.com.br
+Senha: admin123
+
+Cliente:
+Email: cliente@empresa.com.br
+Senha: cliente123
+
+=====================================================
+PROBLEMAS COMUNS
+=====================================================
+
+ERRO 500:
+- Verifique permissões: chmod 777 writable/
+- Verifique se .htaccess existe em public/
+- Veja os logs: writable/logs/
+
+ERRO "Class not found":
+- Execute: composer install
+- Ou: composer2 install
+
+ERRO de banco de dados:
+- Verifique se importou o database.sql
+- Teste conexão no phpMyAdmin
+
+Página em branco:
+- chmod 777 writable/
+- Veja erro em: writable/logs/log-*.php
+
+=====================================================
+SUPORTE
+=====================================================
+
+Se precisar de ajuda, verifique:
+1. writable/logs/ - logs do sistema
+2. error_log do servidor
+3. Console do navegador (F12)
+
+Boa sorte! 🚀
+=====================================================

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico PWA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .status {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .ok { border-left: 4px solid #28a745; }
+        .erro { border-left: 4px solid #dc3545; }
+        .aviso { border-left: 4px solid #ffc107; }
+        h1 { color: #333; }
+        h2 { color: #6f42c1; font-size: 18px; margin-top: 0; }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .btn {
+            background: #6f42c1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnóstico PWA - Avaliador Sabores</h1>
+
+    <div id="resultados"></div>
+
+    <button class="btn" onclick="location.reload()">🔄 Atualizar</button>
+    <button class="btn" onclick="testarFullscreen()">📱 Testar Fullscreen</button>
+
+    <script>
+        const resultados = document.getElementById('resultados');
+
+        function addStatus(titulo, mensagem, tipo, detalhes = null) {
+            const div = document.createElement('div');
+            div.className = `status ${tipo}`;
+            div.innerHTML = `
+                <h2>${titulo}</h2>
+                <p>${mensagem}</p>
+                ${detalhes ? `<pre>${detalhes}</pre>` : ''}
+            `;
+            resultados.appendChild(div);
+        }
+
+        // 1. Verificar Service Worker
+        if ('serviceWorker' in navigator) {
+            addStatus('✅ Service Worker API', 'Suportado pelo navegador', 'ok');
+
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                if (registrations.length > 0) {
+                    addStatus('✅ Service Worker',
+                        `${registrations.length} Service Worker(s) registrado(s)`,
+                        'ok',
+                        JSON.stringify(registrations.map(r => ({
+                            scope: r.scope,
+                            active: r.active?.state
+                        })), null, 2)
+                    );
+                } else {
+                    addStatus('⚠️ Service Worker',
+                        'Nenhum Service Worker registrado',
+                        'aviso'
+                    );
+                }
+            });
+        } else {
+            addStatus('❌ Service Worker', 'Não suportado pelo navegador', 'erro');
+        }
+
+        // 2. Verificar Manifest
+        fetch('/public/manifest.json')
+            .then(r => r.json())
+            .then(manifest => {
+                addStatus('✅ Manifest',
+                    'Manifest carregado com sucesso',
+                    'ok',
+                    JSON.stringify(manifest, null, 2)
+                );
+            })
+            .catch(e => {
+                addStatus('❌ Manifest',
+                    'Erro ao carregar manifest.json',
+                    'erro',
+                    e.message
+                );
+            });
+
+        // 3. Verificar ícones
+        const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        iconSizes.forEach(size => {
+            const img = new Image();
+            img.onload = () => {
+                addStatus(`✅ Ícone ${size}x${size}`, 'Carregado com sucesso', 'ok');
+            };
+            img.onerror = () => {
+                addStatus(`❌ Ícone ${size}x${size}`, 'Falha ao carregar', 'erro');
+            };
+            img.src = `/public/icons/icon-${size}x${size}.png`;
+        });
+
+        // 4. Verificar modo standalone
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                            window.navigator.standalone === true;
+
+        if (isStandalone) {
+            addStatus('✅ Modo Standalone',
+                'App está rodando em modo instalado!',
+                'ok'
+            );
+        } else {
+            addStatus('⚠️ Modo Standalone',
+                'App está rodando no navegador (não instalado)',
+                'aviso'
+            );
+        }
+
+        // 5. Verificar HTTPS
+        if (location.protocol === 'https:') {
+            addStatus('✅ HTTPS', 'Conexão segura', 'ok');
+        } else {
+            addStatus('⚠️ HTTP',
+                'Conexão não segura - PWAs funcionam melhor com HTTPS',
+                'aviso',
+                `URL atual: ${location.href}`
+            );
+        }
+
+        // 6. Informações do navegador
+        addStatus('ℹ️ Navegador',
+            navigator.userAgent,
+            'ok',
+            JSON.stringify({
+                plataforma: navigator.platform,
+                idioma: navigator.language,
+                online: navigator.onLine,
+                cookiesHabilitados: navigator.cookieEnabled
+            }, null, 2)
+        );
+
+        // 7. Verificar capacidades PWA
+        const capacidades = {
+            'Notificações': 'Notification' in window,
+            'Geolocalização': 'geolocation' in navigator,
+            'Câmera/Mídia': 'mediaDevices' in navigator,
+            'Armazenamento Local': 'localStorage' in window,
+            'IndexedDB': 'indexedDB' in window,
+            'Cache API': 'caches' in window,
+            'Fullscreen API': 'requestFullscreen' in document.documentElement
+        };
+
+        let capOk = 0, capTotal = Object.keys(capacidades).length;
+        for (let [nome, suportado] of Object.entries(capacidades)) {
+            if (suportado) capOk++;
+        }
+
+        addStatus('ℹ️ Capacidades PWA',
+            `${capOk}/${capTotal} capacidades suportadas`,
+            capOk === capTotal ? 'ok' : 'aviso',
+            JSON.stringify(capacidades, null, 2)
+        );
+
+        // Função para testar fullscreen
+        function testarFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            } else {
+                alert('Fullscreen não suportado neste navegador');
+            }
+        }
+
+        // 8. Verificar beforeinstallprompt
+        let installPromptReceived = false;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            installPromptReceived = true;
+            addStatus('✅ Install Prompt',
+                'Navegador está pronto para instalar o PWA',
+                'ok'
+            );
+        });
+
+        // Aguardar 2 segundos para ver se o evento foi disparado
+        setTimeout(() => {
+            if (!installPromptReceived) {
+                addStatus('⚠️ Install Prompt',
+                    'Evento de instalação não foi disparado - pode já estar instalado ou não atender critérios de PWA',
+                    'aviso'
+                );
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

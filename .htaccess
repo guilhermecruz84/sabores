@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Evitar loop - não redirecionar se já estiver em /public
+    RewriteCond %{REQUEST_URI} !^(.*/)?public/
+
+    # E não for um arquivo ou diretório existente
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Redireciona para public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

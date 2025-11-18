@@ -1,0 +1,43 @@
+# CodeIgniter 4
+/vendor/
+/writable/cache/*
+/writable/debugbar/*
+/writable/logs/*
+/writable/session/*
+/writable/uploads/*
+!/writable/index.html
+!/writable/*/index.html
+
+# Environment files (NUNCA commitar!)
+.env
+.env.*
+!.env.example
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporários
+*.zip
+*.log
+*.tmp
+ci4-temp.zip
+ci4.zip
+temp_sistema/
+
+# Scripts específicos do servidor
+fix-permissions.sh
+restart-apache.sh
+restart-apache-ssl.sh
+
+# Documentação de instalação (pode commitar se quiser)
+# INSTALL*.md
+# LEIA_*.md
+# *.txt

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instalar PWA - Android</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            line-height: 1.6;
+        }
+        .container {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #6f42c1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #6f42c1;
+        }
+        .step-number {
+            background: #6f42c1;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .btn {
+            display: block;
+            background: #6f42c1;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #5a32a3;
+        }
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .emoji {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Instalar PWA - Avaliador Sabores</h1>
+
+        <div class="warning">
+            <strong>⚠️ IMPORTANTE:</strong> Este processo requer Google Chrome no Android. Não funciona no navegador padrão.
+        </div>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Remova o atalho antigo</strong><br>
+            Segure o ícone "Avaliador" na tela inicial e remova completamente.
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Abra as Configurações do Chrome</strong><br>
+            Menu (⋮) → Configurações → Privacidade e segurança → Limpar dados de navegação
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Limpe TUDO:</strong><br>
+            ✓ Histórico de navegação<br>
+            ✓ Cookies e dados de sites<br>
+            ✓ Imagens e arquivos em cache<br>
+            Período: <strong>Todos os períodos</strong>
+        </div>
+
+        <div class="step">
+            <span class="step-number">4</span>
+            <strong>Feche o Chrome completamente</strong><br>
+            Apps Recentes → Deslize o Chrome para cima (fechar app)
+        </div>
+
+        <div class="step">
+            <span class="step-number">5</span>
+            <strong>Abra o Chrome novamente e acesse:</strong><br>
+            <code>https://192.168.0.16/public/avaliador</code>
+        </div>
+
+        <div class="step">
+            <span class="step-number">6</span>
+            <strong>Aceite o certificado:</strong><br>
+            Quando aparecer "Sua conexão não é particular":<br>
+            → Clique em <strong>"Avançado"</strong><br>
+            → Clique em <strong>"Continuar para 192.168.0.16 (não seguro)"</strong>
+        </div>
+
+        <div class="step">
+            <span class="step-number">7</span>
+            <strong>Faça login</strong> com usuário do tipo "avaliador"
+        </div>
+
+        <div class="step">
+            <span class="step-number">8</span>
+            <strong>Espere 5 segundos</strong> após o login (para o Service Worker registrar)
+        </div>
+
+        <div class="step">
+            <span class="step-number">9</span>
+            <strong>Instale o app:</strong><br>
+            Menu (⋮) → Procure por <strong>"Instalar app"</strong> ou <strong>"Adicionar à tela inicial"</strong><br>
+            <em>Se só aparecer "Adicionar à tela inicial", o PWA não foi reconhecido. Tente novamente do passo 2.</em>
+        </div>
+
+        <div class="success">
+            <span class="emoji">✅</span>
+            <strong>Como saber se funcionou:</strong><br>
+            • O app deve abrir SEM barra de endereço<br>
+            • Tela totalmente cheia<br>
+            • Aparece nos apps recentes com nome "Avaliador"<br>
+            • Tem splash screen roxo ao abrir
+        </div>
+
+        <a href="https://192.168.0.16/public/diagnostico-pwa.html" class="btn">
+            🔍 Testar Diagnóstico PWA
+        </a>
+
+        <a href="https://192.168.0.16/public/avaliador" class="btn">
+            🚀 Ir para Avaliador
+        </a>
+
+        <div class="warning">
+            <strong>💡 Dica:</strong> Se após 3 tentativas ainda não funcionar, o problema pode ser:<br>
+            • Versão muito antiga do Chrome (atualize pela Play Store)<br>
+            • Tablet muito antigo (Android 5 ou inferior)<br>
+            • Restrições de segurança do dispositivo
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Aceitar o Certificado SSL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            line-height: 1.6;
+        }
+        .container {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #6f42c1;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #6f42c1;
+        }
+        .step-number {
+            background: #6f42c1;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #6f42c1;
+            margin-bottom: 10px;
+        }
+        .screenshot {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        code {
+            background: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #d63384;
+        }
+        .btn {
+            display: inline-block;
+            background: #6f42c1;
+            color: white;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #5a32a3;
+        }
+        .device-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        .device-title {
+            color: #6f42c1;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            font-size: 30px;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Como Aceitar o Certificado SSL</h1>
+        <p class="subtitle">Guia completo para acessar o sistema com HTTPS</p>
+
+        <div class="warning">
+            <strong>⚠️ Por que aparece "Sua conexão não é privada"?</strong><br>
+            O sistema usa um certificado SSL <strong>autoassinado</strong> (não emitido por autoridade certificadora oficial).
+            Isso é <strong>totalmente seguro</strong> para uso em rede local, mas o navegador exibe esse aviso por padrão.
+        </div>
+
+        <div class="info">
+            <strong>💡 É seguro aceitar?</strong><br>
+            Sim! Você está acessando seu próprio servidor local. O certificado garante que a conexão está criptografada,
+            protegendo seus dados na rede.
+        </div>
+
+        <!-- CHROME NO COMPUTADOR -->
+        <div class="device-section">
+            <div class="device-title">
+                <span class="icon">💻</span>
+                Google Chrome - Computador (Mac/Windows)
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Você verá esta tela:</div>
+                    <div class="screenshot">
+                        ⚠️ Sua conexão não é privada<br>
+                        Invasores podem estar tentando roubar suas informações de MacBook-Pro-de-Guilherme.local...
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Clique em "Avançado"</div>
+                    <p>Procure o botão <code>Avançado</code> na parte inferior da mensagem de erro.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Clique em "Continuar para MacBook-Pro-de-Guilherme.local (não seguro)"</div>
+                    <p>Depois de clicar em Avançado, aparecerá um link para continuar mesmo assim.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">✅ Pronto!</div>
+                    <p>O site vai carregar normalmente. O Chrome vai lembrar da sua escolha.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHROME NO ANDROID -->
+        <div class="device-section">
+            <div class="device-title">
+                <span class="icon">📱</span>
+                Google Chrome - Tablet/Celular Android
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Você verá esta tela:</div>
+                    <div class="screenshot">
+                        ⚠️ Sua conexão não é privada<br>
+                        Invasores podem estar tentando roubar suas informações...
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Toque em "Avançado"</div>
+                    <p>Na parte inferior da tela, toque no link <code>Avançado</code>.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Toque em "Continuar para MacBook-Pro-de-Guilherme.local (não seguro)"</div>
+                    <p>Aparecerá um link para prosseguir. Toque nele.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">✅ Pronto!</div>
+                    <p>O sistema vai carregar. Faça login normalmente.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAFARI NO MAC -->
+        <div class="device-section">
+            <div class="device-title">
+                <span class="icon">🍎</span>
+                Safari - Mac
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Você verá: "Este site pode não ser seguro"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Clique em "Mostrar Detalhes"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Clique em "visitar este site"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">✅ Pronto!</div>
+                    <p>O Safari vai carregar o site.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAFARI NO iOS/iPadOS -->
+        <div class="device-section">
+            <div class="device-title">
+                <span class="icon">📱</span>
+                Safari - iPad/iPhone
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Você verá: "Este site pode não ser seguro"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Toque em "Mostrar Detalhes"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">Toque em "visitar este site"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px);">
+                    <div class="step-title">✅ Pronto!</div>
+                    <p>O site vai carregar normalmente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>❓ O aviso vai aparecer sempre?</strong><br>
+            <strong>Não!</strong> Depois de aceitar o certificado uma vez, o navegador vai lembrar e não vai mostrar o aviso novamente
+            (a menos que você limpe o cache ou use modo anônimo).
+        </div>
+
+        <div class="info">
+            <strong>🔐 Por que usar HTTPS se dá esse aviso?</strong><br>
+            Mesmo com certificado autoassinado, o HTTPS:
+            <ul>
+                <li>✅ Criptografa todos os dados entre dispositivos</li>
+                <li>✅ Protege senhas e informações sensíveis</li>
+                <li>✅ É necessário para PWA funcionar corretamente</li>
+                <li>✅ É mais seguro que HTTP puro</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://MacBook-Pro-de-Guilherme.local/public/" class="btn">
+                🚀 Acessar Sistema Agora
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">
+            <p>Endereço do sistema: <code>https://MacBook-Pro-de-Guilherme.local/public/</code></p>
+        </div>
+    </div>
+</body>
+</html>
