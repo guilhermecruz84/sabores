@@ -19,7 +19,7 @@ Via FTP ou webhook automático, os seguintes arquivos devem estar no servidor:
 
 Antes de instalar no tablet, **teste primeiro no computador**:
 
-1. Acesse: `https://saboresemmovimento.com.br/controle/testar-pwa.html`
+1. Acesse: `https://saboresemmovimento.com.br/controle/testar-pwa.php`
 2. Clique em "Executar Testes"
 3. Verifique se todos os itens estão ✅ verdes
 4. Se algo estiver ❌ vermelho, leia as soluções na página
@@ -63,7 +63,7 @@ Isso significa que o navegador NÃO detectou o PWA. Faça:
 4. Limpe
 5. **Feche o Chrome COMPLETAMENTE** (não deixe em segundo plano)
 6. Reabra o Chrome
-7. Acesse: `https://saboresemmovimento.com.br/controle/testar-pwa.html`
+7. Acesse: `https://saboresemmovimento.com.br/controle/testar-pwa.php`
 8. Verifique se tudo está ✅ verde
 9. Acesse: `https://saboresemmovimento.com.br/controle/avaliador`
 10. **AGUARDE 5 SEGUNDOS**
