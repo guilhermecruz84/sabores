@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Avaliador Sabores</string>
+    <string name="title_activity_main">Avaliador Sabores</string>
+    <string name="package_name">com.sabores.avaliador</string>
+    <string name="custom_url_scheme">com.sabores.avaliador</string>
+</resources>
