@@ -100,6 +100,9 @@ AddDefaultCharset UTF-8
       RewriteEngine On
       RewriteBase /controle/
 
+      # Permitir acesso direto a arquivos específicos para PWA
+      RewriteRule ^(testar-pwa\.php|gerar-icones\.php|icon-192\.png\.php|icon-512\.png\.php|manifest\.json|service-worker\.js)$ public/$1 [L]
+
       # Evitar loop - não redirecionar se já estiver em /public
       RewriteCond %{REQUEST_URI} !^/controle/public/
 
