@@ -2,7 +2,7 @@
   "name": "Avaliador Sabores em Movimento",
   "short_name": "Avaliador",
   "description": "Sistema de Avaliação de Cardápio e Colaboradoras",
-  "start_url": "/controle/avaliador?source=pwa",
+  "start_url": "/controle/avaliador",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f5576c",
@@ -10,42 +10,16 @@
   "scope": "/controle/",
   "icons": [
     {
-      "src": "/controle/assets/icons/icon-192x192.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f5576c'/%3E%3Cstop offset='1' stop-color='%23f093fb'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' fill='url(%23g)'/%3E%3Ctext x='96' y='120' font-size='80' text-anchor='middle' fill='white' font-family='Arial'%3E🍽️%3C/text%3E%3C/svg%3E",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/controle/assets/icons/icon-512x512.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f5576c'/%3E%3Cstop offset='1' stop-color='%23f093fb'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23g)'/%3E%3Ctext x='256' y='320' font-size='220' text-anchor='middle' fill='white' font-family='Arial'%3E🍽️%3C/text%3E%3C/svg%3E",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Avaliar Cardápio",
-      "short_name": "Cardápio",
-      "description": "Avaliar o cardápio de hoje",
-      "url": "/controle/avaliador/avaliar-cardapio",
-      "icons": [
-        {
-          "src": "/controle/assets/icons/icon-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Avaliar Colaboradora",
-      "short_name": "Colaboradora",
-      "description": "Avaliar o atendimento",
-      "url": "/controle/avaliador/avaliar-colaboradora",
-      "icons": [
-        {
-          "src": "/controle/assets/icons/icon-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
     }
   ],
   "categories": ["business", "productivity"],
