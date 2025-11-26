@@ -26,6 +26,9 @@ Options -Indexes
     RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
     RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
 
+    # Permitir acesso direto a arquivos PWA (ANTES das outras regras)
+    RewriteRule ^(icon-192\.png|icon-512\.png|manifest\.json|service-worker\.js)$ public/$1 [L]
+
     # Checks to see if the user is attempting to access a valid file,
     # such as an image or css document, if this isn't true it sends the
     # request to the front controller, index.php
@@ -99,9 +102,6 @@ AddDefaultCharset UTF-8
   <IfModule mod_rewrite.c>
       RewriteEngine On
       RewriteBase /controle/
-
-      # Permitir acesso direto a arquivos específicos para PWA
-      RewriteRule ^(testar-pwa\.php|gerar-icones\.php|icon-192\.png|icon-512\.png|manifest\.json|service-worker\.js)$ public/$1 [L]
 
       # Evitar loop - não redirecionar se já estiver em /public
       RewriteCond %{REQUEST_URI} !^/controle/public/
