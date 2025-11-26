@@ -538,7 +538,7 @@ class Avaliacoes extends BaseController
 
     /**
      * Gerar cardápios automaticamente para dias úteis do mês
-     * (Segunda a Sexta-feira)
+     * (Segunda a Sexta-feira, apenas até a data atual)
      */
     protected function gerarCardapiosDiasUteis($empresaId, $mes, $ano)
     {
@@ -546,7 +546,13 @@ class Avaliacoes extends BaseController
         $primeiroDia = strtotime("$ano-$mes-01");
         $ultimoDia = strtotime(date('Y-m-t', $primeiroDia));
 
-        // Percorrer todos os dias do mês
+        // Limite: não gerar cardápios futuros (apenas até hoje)
+        $hoje = strtotime(date('Y-m-d'));
+        if ($ultimoDia > $hoje) {
+            $ultimoDia = $hoje;
+        }
+
+        // Percorrer todos os dias do mês (até hoje)
         for ($timestamp = $primeiroDia; $timestamp <= $ultimoDia; $timestamp = strtotime('+1 day', $timestamp)) {
             $diaSemana = date('w', $timestamp); // 0=domingo, 6=sábado
 
