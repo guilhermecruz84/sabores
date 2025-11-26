@@ -1,82 +1,73 @@
 # Como Instalar o App no Tablet
 
-## 📱 Passo a Passo para Instalação
+## 📱 Passo a Passo SIMPLIFICADO
 
-### 1. Criar os Ícones do App
+### 1. Fazer Upload dos Arquivos para o Servidor ✅
 
-Você precisa criar 2 ícones PNG e colocá-los na pasta `public/assets/icons/`:
-
-- `icon-192x192.png` (192x192 pixels)
-- `icon-512x512.png` (512x512 pixels)
-
-**Opções para criar:**
-
-**A) Usar um gerador online:**
-1. Acesse: https://www.favicon-generator.org/
-2. Faça upload do logo da empresa
-3. Baixe os ícones gerados
-4. Renomeie para os tamanhos corretos
-
-**B) Usar Photoshop/GIMP:**
-1. Abra o logo da empresa
-2. Redimensione para 192x192 e 512x512
-3. Salve como PNG
-4. Coloque em `/public/assets/icons/`
-
-**C) Criar via terminal (se tiver ImageMagick):**
-```bash
-# No diretório do projeto
-cd /Applications/XAMPP/xamppfiles/htdocs/controle/public
-mkdir -p assets/icons
-
-# Criar ícone 192x192 (substitua 'logo.png' pelo seu logo)
-convert logo.png -resize 192x192 assets/icons/icon-192x192.png
-
-# Criar ícone 512x512
-convert logo.png -resize 512x512 assets/icons/icon-512x512.png
-```
-
-### 2. Fazer Upload dos Arquivos para o Servidor
-
-Via FTP, faça upload dos seguintes arquivos para o servidor:
+Via FTP ou webhook automático, os seguintes arquivos devem estar no servidor:
 
 ```
 /public_html/controle/public/manifest.json
 /public_html/controle/public/service-worker.js
-/public_html/controle/public/assets/icons/icon-192x192.png
-/public_html/controle/public/assets/icons/icon-512x512.png
+/public_html/controle/public/testar-pwa.html
 /public_html/controle/app/Views/layouts/avaliador.php
 ```
 
-### 3. Instalar no Tablet (Android)
+**✅ NÃO PRECISA MAIS criar ícones!** Os ícones agora são SVG inline (já incluídos no manifest.json)
 
-#### Chrome/Edge:
-1. Abra o navegador no tablet
+### 2. Testar se PWA está funcionando
+
+Antes de instalar no tablet, **teste primeiro no computador**:
+
+1. Acesse: `https://saboresemmovimento.com.br/controle/testar-pwa.html`
+2. Clique em "Executar Testes"
+3. Verifique se todos os itens estão ✅ verdes
+4. Se algo estiver ❌ vermelho, leia as soluções na página
+
+### 3. Instalar no Tablet
+
+## ⚠️ IMPORTANTE: Como fazer o app abrir em TELA CHEIA (não como página web)
+
+### Android (Chrome/Edge) - PASSOS CORRETOS:
+
+1. **NO TABLET**, abra o Chrome ou Edge
 2. Acesse: `https://saboresemmovimento.com.br/controle/avaliador`
 3. Faça login com usuário tipo "avaliador"
-4. Toque no menu (3 pontinhos) ⋮
-5. Selecione **"Adicionar à tela inicial"** ou **"Instalar aplicativo"**
-6. Confirme a instalação
-7. O ícone aparecerá na tela inicial
+4. **AGUARDE 3-5 SEGUNDOS** (importante para o navegador detectar o PWA)
+5. Toque no menu ⋮ (3 pontinhos no canto superior direito)
+6. Procure por **"Instalar aplicativo"** ou **"Instalar Avaliador"**
+   - ✅ Se aparecer "Instalar aplicativo" → CLIQUE AQUI (é o correto!)
+   - ❌ Se aparecer só "Adicionar à tela inicial" → Veja solução abaixo
+7. Confirme a instalação
+8. **FECHE O NAVEGADOR COMPLETAMENTE**
+9. Abra o app pelo ícone na tela inicial
 
-#### Firefox:
-1. Abra o Firefox no tablet
-2. Acesse: `https://saboresemmovimento.com.br/controle/avaliador`
-3. Toque no menu (3 pontinhos) ⋮
-4. Selecione **"Adicionar à tela inicial"**
-5. Confirme
+### iPad/iPhone (iOS) - Safari:
 
-### 4. Instalar no iPad/iPhone (iOS)
-
-#### Safari:
-1. Abra o Safari no iPad
+1. Abra o **Safari** no iPad (não funciona em Chrome/Firefox no iOS)
 2. Acesse: `https://saboresemmovimento.com.br/controle/avaliador`
 3. Faça login
-4. Toque no botão **Compartilhar** (quadrado com seta para cima)
+4. Toque no botão **Compartilhar** (ícone 📤 na parte inferior/superior)
 5. Role para baixo e toque em **"Adicionar à Tela de Início"**
-6. Ajuste o nome se desejar
-7. Toque em **"Adicionar"**
-8. O ícone aparecerá na tela inicial
+6. Confirme
+7. **FECHE O SAFARI COMPLETAMENTE**
+8. Abra o app pelo ícone na tela inicial
+
+## 🔧 Solução: Se aparecer só "Adicionar à tela inicial" (Android)
+
+Isso significa que o navegador NÃO detectou o PWA. Faça:
+
+1. **Desinstale** qualquer versão anterior (pressione e segure o ícone → Remover)
+2. No Chrome, vá em **Configurações** → **Privacidade** → **Limpar dados de navegação**
+3. Marque: "Cookies" e "Imagens em cache"
+4. Limpe
+5. **Feche o Chrome COMPLETAMENTE** (não deixe em segundo plano)
+6. Reabra o Chrome
+7. Acesse: `https://saboresemmovimento.com.br/controle/testar-pwa.html`
+8. Verifique se tudo está ✅ verde
+9. Acesse: `https://saboresemmovimento.com.br/controle/avaliador`
+10. **AGUARDE 5 SEGUNDOS**
+11. Tente instalar novamente
 
 ### 5. Usar o App
 
