@@ -146,10 +146,60 @@ class Chamados extends BaseController
 
             $chamado = $this->chamadoModel->find($chamadoId);
 
+            // Enviar email de notificação
+            $this->enviarEmailNovoChamado($chamado);
+
             return redirect()->to('/chamados/ver/' . $chamadoId)
                 ->with('sucesso', 'Chamado #' . $chamado->protocolo . ' criado com sucesso!');
         } else {
             return redirect()->back()->withInput()->with('erro', 'Erro ao criar chamado. Tente novamente.');
+        }
+    }
+
+    /**
+     * Enviar email de notificação para novo chamado
+     */
+    protected function enviarEmailNovoChamado($chamado)
+    {
+        try {
+            // Buscar dados do usuário e empresa
+            $usuario = $this->usuarioModel->find($chamado->usuario_id);
+            $empresaModel = new \App\Models\EmpresaModel();
+            $empresa = $empresaModel->find($chamado->empresa_id);
+
+            // Configurar email
+            $email = \Config\Services::email();
+
+            // Destinatários
+            $destinatarios = [
+                'administrativo@saboresemmovimento.com.br',
+                'comercial@saboresemmovimento.com.br',
+                'financeiro@saboresemmovimento.com.br'
+            ];
+
+            $email->setTo($destinatarios);
+            $email->setSubject('Novo Chamado #' . $chamado->protocolo . ' - ' . $chamado->assunto);
+
+            // Preparar dados para o template
+            $data = [
+                'chamado' => $chamado,
+                'usuario' => $usuario,
+                'empresa' => $empresa
+            ];
+
+            // Renderizar template
+            $mensagem = view('emails/novo_chamado', $data);
+            $email->setMessage($mensagem);
+
+            // Enviar
+            if (!$email->send()) {
+                // Log de erro (não interrompe o fluxo)
+                log_message('error', 'Falha ao enviar email de novo chamado: ' . $email->printDebugger(['headers']));
+            }
+
+        } catch (\Exception $e) {
+            // Log de erro (não interrompe o fluxo)
+            log_message('error', 'Exceção ao enviar email de novo chamado: ' . $e->getMessage());
         }
     }
 
