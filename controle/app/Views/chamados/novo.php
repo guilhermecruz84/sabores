@@ -11,7 +11,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-edit me-2"></i>
@@ -119,44 +119,6 @@
                         </a>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header bg-info text-white">
-                <i class="fas fa-info-circle me-2"></i>
-                Dicas
-            </div>
-            <div class="card-body">
-                <h6><i class="fas fa-lightbulb text-warning me-2"></i>Como abrir um bom chamado?</h6>
-                <ul class="small">
-                    <li>Seja claro e objetivo no assunto</li>
-                    <li>Descreva todos os detalhes relevantes</li>
-                    <li>Anexe fotos se necessário</li>
-                    <li>Informe quando o problema ocorreu</li>
-                    <li>Indique a prioridade corretamente</li>
-                </ul>
-
-                <hr>
-
-                <h6><i class="fas fa-clock text-primary me-2"></i>Tempo de Resposta</h6>
-                <ul class="small">
-                    <li><strong>Urgente:</strong> até 2 horas</li>
-                    <li><strong>Alta:</strong> até 4 horas</li>
-                    <li><strong>Média:</strong> até 24 horas</li>
-                    <li><strong>Baixa:</strong> até 48 horas</li>
-                </ul>
-
-                <hr>
-
-                <h6><i class="fas fa-phone text-success me-2"></i>Contato Direto</h6>
-                <p class="small mb-0">
-                    Em casos de urgência extrema:<br>
-                    <strong>(11) 9999-9999</strong><br>
-                    <strong>contato@sabores.com.br</strong>
-                </p>
             </div>
         </div>
     </div>
