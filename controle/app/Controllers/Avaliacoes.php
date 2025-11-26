@@ -40,6 +40,9 @@ class Avaliacoes extends BaseController
         $mes = $this->request->getGet('mes') ?? date('m');
         $ano = $this->request->getGet('ano') ?? date('Y');
 
+        // Gerar cardápios automaticamente para dias úteis do mês
+        $this->gerarCardapiosDiasUteis($empresaId, $mes, $ano);
+
         // Buscar cardápios do mês selecionado
         $cardapios = $this->cardapioModel->getCardapiosPorMes($empresaId, $mes, $ano);
 
@@ -531,5 +534,36 @@ class Avaliacoes extends BaseController
         $this->cardapioModel->delete($id);
 
         return redirect()->back()->with('sucesso', 'Cardápio deletado com sucesso!');
+    }
+
+    /**
+     * Gerar cardápios automaticamente para dias úteis do mês
+     * (Segunda a Sexta-feira)
+     */
+    protected function gerarCardapiosDiasUteis($empresaId, $mes, $ano)
+    {
+        // Calcular primeiro e último dia do mês
+        $primeiroDia = strtotime("$ano-$mes-01");
+        $ultimoDia = strtotime(date('Y-m-t', $primeiroDia));
+
+        // Percorrer todos os dias do mês
+        for ($timestamp = $primeiroDia; $timestamp <= $ultimoDia; $timestamp = strtotime('+1 day', $timestamp)) {
+            $diaSemana = date('w', $timestamp); // 0=domingo, 6=sábado
+
+            // Apenas dias úteis (1=segunda até 5=sexta)
+            if ($diaSemana >= 1 && $diaSemana <= 5) {
+                $data = date('Y-m-d', $timestamp);
+
+                // Verificar se já existe cardápio para esta data/empresa
+                if (!$this->cardapioModel->cardapioExiste($empresaId, $data)) {
+                    // Criar cardápio automaticamente
+                    $this->cardapioModel->insert([
+                        'empresa_id' => $empresaId,
+                        'data' => $data,
+                        'descricao' => 'Cardápio do dia ' . date('d/m/Y', $timestamp)
+                    ]);
+                }
+            }
+        }
     }
 }
