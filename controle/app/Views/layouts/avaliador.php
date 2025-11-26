@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= esc($titulo ?? 'Sistema de Avaliação') ?></title>
 
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#f5576c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Avaliador">
+    <link rel="manifest" href="<?= base_url('manifest.json') ?>">
+    <link rel="apple-touch-icon" href="<?= base_url('assets/icons/icon-192x192.png') ?>">
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -78,6 +86,32 @@
         setTimeout(function() {
             $('.alert').fadeOut('slow');
         }, 5000);
+
+        // Registrar Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('<?= base_url('service-worker.js') ?>')
+                    .then(registration => {
+                        console.log('Service Worker registrado com sucesso:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Falha ao registrar Service Worker:', error);
+                    });
+            });
+        }
+
+        // Detectar instalação do PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('PWA pronto para instalação');
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA instalado com sucesso!');
+            deferredPrompt = null;
+        });
     </script>
 
     <?= $this->renderSection('scripts') ?>

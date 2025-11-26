@@ -1,0 +1,53 @@
+{
+  "name": "Avaliador Sabores em Movimento",
+  "short_name": "Avaliador",
+  "description": "Sistema de Avaliação de Cardápio e Colaboradoras",
+  "start_url": "/controle/avaliador?source=pwa",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5576c",
+  "theme_color": "#f5576c",
+  "scope": "/controle/",
+  "icons": [
+    {
+      "src": "/controle/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/controle/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Avaliar Cardápio",
+      "short_name": "Cardápio",
+      "description": "Avaliar o cardápio de hoje",
+      "url": "/controle/avaliador/avaliar-cardapio",
+      "icons": [
+        {
+          "src": "/controle/assets/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Avaliar Colaboradora",
+      "short_name": "Colaboradora",
+      "description": "Avaliar o atendimento",
+      "url": "/controle/avaliador/avaliar-colaboradora",
+      "icons": [
+        {
+          "src": "/controle/assets/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "prefer_related_applications": false
+}
